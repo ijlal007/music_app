@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,17 +13,108 @@ class HomeScreen extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.blue.shade500.withOpacity(0.8),
-            Colors.purple.shade500.withOpacity(0.8),
+            Colors.grey.shade800,
+            Colors.black,
           ],
         ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: _CustomAppBar(),
-        body: Container(),
+        appBar: const _CustomAppBar(),
+        bottomNavigationBar: const _CustomNavBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              const _DiscoverMusic(),
+            ],
+          ),
+        ),
       ),
     );
+  }
+}
+
+class _DiscoverMusic extends StatelessWidget {
+  const _DiscoverMusic({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Welcome',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.grey,
+                ),
+          ),
+          const SizedBox(height: 7),
+          Text(
+            'Your Music',
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: 'Search',
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(color: Colors.grey),
+              prefixIcon: const Icon(Icons.search),
+              filled: true,
+              isDense: true,
+              fillColor: Colors.grey.shade800,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomNavBar extends StatelessWidget {
+  const _CustomNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_outline),
+            label: 'Favourite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_music),
+            label: 'Library',
+          ),
+        ]);
   }
 }
 
@@ -41,16 +134,18 @@ class _CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
         actions: [
           Container(
-            margin: const EdgeInsets.only(right: 20),
-            child: IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
+            padding: const EdgeInsets.only(
+              top: 10,
+              right: 20,
+              bottom: 10,
+            ),
+            child: const CircleAvatar(
+              backgroundImage: AssetImage('assets/images/avatar.jpg'),
             ),
           ),
         ]);
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(56);
 }

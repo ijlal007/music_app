@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Music App',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Colors.white,
@@ -22,11 +23,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomeScreen(),
-      getPages: [
-        GetPage(name: '/', page: () => const HomeScreen()),
-        GetPage(name: '/song', page: () => const SongScreen()),
-        GetPage(name: '/playlist', page: () => const PlayListScreen()),
-      ],
+      // getPages: [
+      //   GetPage(name: '/', page: () => const HomeScreen()),
+      //   // GetPage(name: '/song', page: () => const SongScreen()),
+      //   // GetPage(name: '/playlist', page: () => const PlayListScreen()),
+      // ],
     );
   }
 }
