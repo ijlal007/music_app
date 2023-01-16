@@ -1,12 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:music_app/models/song_model.dart';
+
+import '../widgets/section_header.dart';
+import '../widgets/song_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Song> songs = Song.songs;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -27,6 +32,27 @@ class HomeScreen extends StatelessWidget {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               const _DiscoverMusic(),
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: SectionHeader(title: 'Trending Music'),
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: songs.length,
+                          itemBuilder: (context, index) {
+                            return SongCard(song: songs[index]);
+                          }),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),
