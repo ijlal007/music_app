@@ -1,10 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:music_app/models/song_model.dart';
-
-import '../widgets/section_header.dart';
-import '../widgets/song_card.dart';
+import '../models/song_model.dart';
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,12 +25,11 @@ class HomeScreen extends StatelessWidget {
         bottomNavigationBar: const _CustomNavBar(),
         body: SingleChildScrollView(
           child: Column(
-            // ignore: prefer_const_literals_to_create_immutables
             children: [
               const _DiscoverMusic(),
               Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: SectionHeader(title: 'Trending Music'),
                   ),
